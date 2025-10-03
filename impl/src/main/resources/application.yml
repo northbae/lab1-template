@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/persons
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db-changelog_main.xml
+    enabled: true
+    url: jdbc:postgresql://postgres:5432/persons
+    user: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+springdoc:
+  api-docs:
+    resolve-schema-properties: true
+    path: /api
+  swagger-ui:
+    path: /api/doc
+    display-request-duration: true
+    show-extensions: true
+    show-common-extensions: true
