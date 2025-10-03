@@ -13,14 +13,8 @@ jobs:
           fetch-depth: 0
 
       # Docker build and deploy to Render
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: false
-          tags: lab1-app:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      - name: Build Docker image
+        run: docker build -t my-spring-app .
 
       - name: Deploy to Render
         if: github.ref == 'refs/heads/develop'

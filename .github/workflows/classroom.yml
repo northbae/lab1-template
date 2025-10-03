@@ -16,10 +16,10 @@ jobs:
           fetch-depth: 0
 
       # Build with Maven
-      - name: Set up JDK 17
+      - name: Set up JDK 17 (Corretto)
         uses: actions/setup-java@v4
         with:
-          java-version: '17.0.4'
+          java-version: '17'
           distribution: 'corretto'
 
       - name: Build with Maven
