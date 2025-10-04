@@ -19,7 +19,9 @@ jobs:
           distribution: 'corretto'
 
       - name: Run unit tests
-        run: mvn clean test -Dtest=PersonServiceImplTest
+        run: |
+          cd impl
+          mvn clean test -Dtest="kz.bmstu.kritinina.service.impl.PersonServiceImplTest"
         env:
           SPRING_PROFILES_ACTIVE: test
 
