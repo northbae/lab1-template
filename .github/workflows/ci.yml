@@ -20,6 +20,7 @@ jobs:
 
       - name: Run unit tests
         run: |
+          mvn clean install
           cd impl
           mvn clean test -Dtest="kz.bmstu.kritinina.service.impl.PersonServiceImplTest"
         env:
