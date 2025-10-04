@@ -1,12 +1,10 @@
-FROM maven:3.9.6-openjdk-17 AS builder
+FROM maven:3.9.6-amazoncorretto-17 AS builder
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-COPY impl ./impl
+COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
+FROM amazoncorretto:17
 WORKDIR /app
-COPY --from=builder /app/impl/target/*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
