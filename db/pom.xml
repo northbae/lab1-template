@@ -39,9 +39,9 @@
                 <version>${liquibase-core.version}</version>
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://postgres:5432/persons</url>
-                    <username>postgres</username>
-                    <password>postgres</password>
+                    <url>jdbc:postgresql://dpg-d3g6l01r0fns73bc52l0-a:5432/postgres_db_r2hk</url>
+                    <username>postgres_db_r2hk_user</username>
+                    <password>4Ysew7CONLTYys5cZnwpLWVXPF1HGqc1</password>
                     <changeLogFile>db-changelog_main.xml</changeLogFile>
                 </configuration>
             </plugin>
