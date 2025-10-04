@@ -12,17 +12,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Build with Maven
       - name: Set up JDK 17 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'corretto'
 
+      - name: Run unit tests
+        run: mvn clean test -Dtest=PersonServiceImplTest
+        env:
+          SPRING_PROFILES_ACTIVE: test
+
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      # Docker build and deploy to Render
       - name: Build Docker image
         run: docker build -t my-spring-app .
 
@@ -33,11 +36,3 @@ jobs:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
           github_deployment: true
-
-      - name: Run API Tests
-        uses: matt-ball/newman-action@master
-        with:
-          collection: postman/[inst] Lab1.postman_collection.json
-          environment: postman/[inst][heroku] Lab1.postman_environment.json
-          delayRequest: 100
-          reporters: '[ "cli" ]'
