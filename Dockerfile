@@ -1,7 +1,6 @@
 FROM maven:3.9.6-amazoncorretto-17 AS builder
 WORKDIR /app
 COPY pom.xml .
-COPY src ./src
 COPY impl ./impl
 RUN mvn clean package -DskipTests
 
