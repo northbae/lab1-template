@@ -1,0 +1,44 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17 (Corretto)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Run unit tests
+        run: |
+          mvn clean install
+          cd impl
+          mvn clean test -Dtest="kz.bmstu.kritinina.service.impl.PersonServiceImplTest"
+        env:
+          SPRING_PROFILES_ACTIVE: test
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Build Docker image
+        run: docker build -t my-spring-app .
+
+      - name: Deploy to Render
+        if: github.ref == 'refs/heads/master'
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          github_deployment: true

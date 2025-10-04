@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-d3g6l01r0fns73bc52l0-a:5432/postgres_db_r2hk
+    username: postgres_db_r2hk_user
+    password: 4Ysew7CONLTYys5cZnwpLWVXPF1HGqc1
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db-changelog_main.xml
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+springdoc:
+  api-docs:
+    resolve-schema-properties: true
+    path: /api
+  swagger-ui:
+    path: /api/doc
+    display-request-duration: true
+    show-extensions: true
+    show-common-extensions: true

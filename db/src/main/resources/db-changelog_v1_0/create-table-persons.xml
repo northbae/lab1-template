@@ -1,0 +1,26 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="table-persons" author="Lena">
+        <preConditions onFail="MARK_RAN" onFailMessage="Table exists">
+            <not>
+                <tableExists tableName="persons"/>
+            </not>
+        </preConditions>
+        <createTable tableName="person">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"
+                             nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="smallint"/>
+            <column name="address" type="varchar(255)"/>
+            <column name="work" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
